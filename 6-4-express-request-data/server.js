@@ -121,7 +121,7 @@ app.get("/echo", (req, res) => {
          error: "name & age required"
       });
    }
-   return req.json({
+   return res.json({
       ok: true,
       name,
       age,
@@ -132,7 +132,7 @@ app.get("/echo", (req, res) => {
 // Route params: /profile/First/Last
 app.get("/profile/:first/:last", (req, res) => {
    const {first, last} = req.params;
-   return req.json({
+   return res.json({
       ok: true,
       fullName: `${first} ${last}`
    });
@@ -142,7 +142,7 @@ app.get("/profile/:first/:last", (req, res) => {
 app.param("userId", (req, res, next, userId) => {
    const id = Number(userId);
    if (!Number.isInteger(id) || id <= 0){
-      return req.status(400).json({
+      return res.status(400).json({
          ok: false,
          error: "userId must be positive number"
       });
